@@ -15,7 +15,7 @@ import Link from "next/link";
 export default function Home() {
     return (
         <>
-            <section className="h-full w-full pt-36 relative flex items-center justify-center flex-col">
+            <section className="w-full pt-36 relative flex items-center justify-center flex-col">
                 {/* grid */}
                 <div className="absolute bottom-0 left-0 right-0 top-0 bg-[linear-gradient(to_right,#161616_1px,transparent_1px),linear-gradient(to_bottom,#161616_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_110%)] -z-10" />
                 <p className="text-center">Run your agency, in one place</p>
@@ -35,7 +35,7 @@ export default function Home() {
                 </div>
                 <div className="bottom-0 top-[50%] bg-gradient-to-t dark:from-background left-0 right-0 absolute z-10"></div>
             </section>
-            <section className="flex justify-center items-center flex-col gap-4">
+            <section className="flex justify-center items-center flex-col gap-4 md:!mt-20 mt-[-60px]">
                 <h2 className="text-4xl text-center">
                     Choose what fits you right
                 </h2>
@@ -44,8 +44,9 @@ export default function Home() {
                     needs. If {"you're"} not <br /> ready to commit you can get
                     started for free.
                 </p>
-                <div className="flex gap-4 flex-wrap mt-6">
+                <div className="flex justify-center gap-4 flex-wrap mt-6">
                     {pricingCards.map((card) => (
+                        // WIP: Wire up free product from stripe
                         <Card
                             key={card.title}
                             className={clsx(
