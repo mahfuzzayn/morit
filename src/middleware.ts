@@ -14,7 +14,7 @@ export default clerkMiddleware(async (auth, req) => {
     const hostname = req.headers;
 
     const pathWithSearchParams = `${url.pathname}${
-        searchParams.length > 0 ? `${searchParams}` : ""
+        searchParams.length > 0 ? `?${searchParams}` : ""
     }`;
 
     // if subdomain exists
@@ -46,7 +46,7 @@ export default clerkMiddleware(async (auth, req) => {
         url.pathname.startsWith("/subaccount")
     ) {
         return NextResponse.rewrite(
-            new URL(`/${pathWithSearchParams}`, req.url)
+            new URL(`${pathWithSearchParams}`, req.url)
         );
     }
 });
