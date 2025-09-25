@@ -11,13 +11,22 @@ import {
     CardHeader,
     CardTitle,
 } from "../ui/card";
-import { Form, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { useToast } from "../ui/use-toast";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { fa } from "zod/v4/locales";
-import { FormControl, FormField, FormItem, FormLabel } from "../ui/form";
+import {
+    Form,
+    FormControl,
+    FormDescription,
+    FormField,
+    FormItem,
+    FormLabel,
+    FormMessage,
+} from "../ui/form";
 import FileUpload from "../global/file-upload";
+import { Input } from "../ui/input";
+import { Switch } from "../ui/switch";
 
 type Props = {
     data?: Partial<Agency>;
@@ -88,15 +97,197 @@ const AgencyDetails = ({ data }: Props) => {
                                     disabled={isLoading}
                                     control={form.control}
                                     name="agencyLogo"
-                                    render={({ field }) => {
+                                    render={({ field }) => (
                                         <FormItem>
                                             <FormLabel>Agency Logo</FormLabel>
                                             <FormControl>
-                                                <FileUpload></FileUpload>
+                                                <FileUpload
+                                                    apiEndpoint="agencyLogo"
+                                                    onChange={field.onChange}
+                                                    value={field.value}
+                                                />
                                             </FormControl>
-                                        </FormItem>;
+                                        </FormItem>
+                                    )}
+                                />
+                                <div className="flex flex-col md:flex-row gap-4">
+                                    <FormField
+                                        disabled={isLoading}
+                                        control={form.control}
+                                        name="name"
+                                        render={({ field }) => (
+                                            <FormItem className="flex-1">
+                                                <FormLabel>
+                                                    Agency Name
+                                                </FormLabel>
+                                                <FormControl>
+                                                    <Input
+                                                        {...field}
+                                                        placeholder="Your Agency Name"
+                                                    />
+                                                </FormControl>
+                                            </FormItem>
+                                        )}
+                                    />
+                                    <FormField
+                                        disabled={isLoading}
+                                        control={form.control}
+                                        name="companyEmail"
+                                        render={({ field }) => (
+                                            <FormItem className="flex-1">
+                                                <FormLabel>Email</FormLabel>
+                                                <FormControl>
+                                                    <Input
+                                                        {...field}
+                                                        readOnly
+                                                        placeholder="Email"
+                                                    />
+                                                </FormControl>
+                                            </FormItem>
+                                        )}
+                                    />
+                                </div>
+                                <div className="flex md:flex-row gap-4">
+                                    <FormField
+                                        disabled={isLoading}
+                                        control={form.control}
+                                        name="companyPhone"
+                                        render={({ field }) => (
+                                            <FormItem className="flex-1">
+                                                <FormLabel>
+                                                    Agency Phone Number
+                                                </FormLabel>
+                                                <FormControl>
+                                                    <Input
+                                                        placeholder="Phone"
+                                                        {...field}
+                                                    />
+                                                </FormControl>
+                                                <FormMessage />
+                                            </FormItem>
+                                        )}
+                                    />
+                                </div>
+                                <FormField
+                                    disabled={isLoading}
+                                    control={form.control}
+                                    name="whiteLabel"
+                                    render={({ field }) => {
+                                        return (
+                                            <FormItem className="flex flex-row items-center justify-between rounded-lg border gap-4 p-4">
+                                                <div>
+                                                    <FormLabel>
+                                                        Whitelabel Agency
+                                                    </FormLabel>
+                                                    <FormDescription>
+                                                        Turning on whilelabel
+                                                        mode will show your
+                                                        agency logo to all sub
+                                                        accounts by default. You
+                                                        can overwrite this
+                                                        functionality through
+                                                        sub account settings.
+                                                    </FormDescription>
+                                                </div>
+                                                <FormControl>
+                                                    <Switch
+                                                        checked={field.value}
+                                                        onCheckedChange={
+                                                            field.onChange
+                                                        }
+                                                    />
+                                                </FormControl>
+                                            </FormItem>
+                                        );
                                     }}
-                                ></FormField>
+                                />
+                                <FormField
+                                    disabled={isLoading}
+                                    control={form.control}
+                                    name="address"
+                                    render={({ field }) => (
+                                        <FormItem className="flex-1">
+                                            <FormLabel>Address</FormLabel>
+                                            <FormControl>
+                                                <Input
+                                                    placeholder="123 st..."
+                                                    {...field}
+                                                />
+                                            </FormControl>
+                                            <FormMessage />
+                                        </FormItem>
+                                    )}
+                                />
+                                <div className="flex md:flex-row gap-4">
+                                    <FormField
+                                        disabled={isLoading}
+                                        control={form.control}
+                                        name="city"
+                                        render={({ field }) => (
+                                            <FormItem className="flex-1">
+                                                <FormLabel>City</FormLabel>
+                                                <FormControl>
+                                                    <Input
+                                                        placeholder="City"
+                                                        {...field}
+                                                    />
+                                                </FormControl>
+                                                <FormMessage />
+                                            </FormItem>
+                                        )}
+                                    />
+                                    <FormField
+                                        disabled={isLoading}
+                                        control={form.control}
+                                        name="state"
+                                        render={({ field }) => (
+                                            <FormItem className="flex-1">
+                                                <FormLabel>State</FormLabel>
+                                                <FormControl>
+                                                    <Input
+                                                        placeholder="State"
+                                                        {...field}
+                                                    />
+                                                </FormControl>
+                                                <FormMessage />
+                                            </FormItem>
+                                        )}
+                                    />
+                                    <FormField
+                                        disabled={isLoading}
+                                        control={form.control}
+                                        name="zipCode"
+                                        render={({ field }) => (
+                                            <FormItem className="flex-1">
+                                                <FormLabel>Zipcpde</FormLabel>
+                                                <FormControl>
+                                                    <Input
+                                                        placeholder="Zipcode"
+                                                        {...field}
+                                                    />
+                                                </FormControl>
+                                                <FormMessage />
+                                            </FormItem>
+                                        )}
+                                    />
+                                </div>
+                                <FormField
+                                    disabled={isLoading}
+                                    control={form.control}
+                                    name="country"
+                                    render={({ field }) => (
+                                        <FormItem className="flex-1">
+                                            <FormLabel>Country</FormLabel>
+                                            <FormControl>
+                                                <Input
+                                                    placeholder="Country"
+                                                    {...field}
+                                                />
+                                            </FormControl>
+                                            <FormMessage />
+                                        </FormItem>
+                                    )}
+                                />
                             </form>
                         </Form>
                     </CardContent>
