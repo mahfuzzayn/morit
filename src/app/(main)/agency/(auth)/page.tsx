@@ -16,7 +16,7 @@ const Page = async ({
     // Get users details
     const user = await getAuthUserDetails();
 
-    console.log(user) 
+    // console.log(user) 
 
     if (agencyId) {
         if (

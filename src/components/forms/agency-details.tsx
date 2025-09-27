@@ -75,21 +75,21 @@ const AgencyDetails = ({ data }: Props) => {
     const { toast } = useToast();
     const router = useRouter();
     const [deletingAgency, setDeletingAgency] = useState(false);
-    
+
     const form = useForm<z.infer<typeof FormSchema>>({
         mode: "onChange",
         resolver: zodResolver(FormSchema),
         defaultValues: {
-            name: data?.name,
-            companyEmail: data?.companyEmail,
-            companyPhone: data?.companyPhone,
+            name: data?.name ?? "",
+            companyEmail: data?.companyEmail ?? "",
+            companyPhone: data?.companyPhone ?? "",
             whiteLabel: data?.whiteLabel || false,
-            address: data?.address,
-            city: data?.city,
+            address: data?.address ?? "",
+            city: data?.city ?? "",
             zipCode: data?.zipCode,
-            state: data?.state,
-            country: data?.country,
-            agencyLogo: data?.agencyLogo,
+            state: data?.state ?? "",
+            country: data?.country ?? "",
+            agencyLogo: data?.agencyLogo ?? "",
         },
     });
 
@@ -102,6 +102,7 @@ const AgencyDetails = ({ data }: Props) => {
     }, [data, form]);
 
     const handleSubmit = async (values: z.infer<typeof FormSchema>) => {
+        console.log(values);
         try {
             let newUserData;
             let customerId;
@@ -159,7 +160,7 @@ const AgencyDetails = ({ data }: Props) => {
             }
         } catch (error) {
             console.log(error);
-            
+
             toast({
                 variant: "destructive",
                 title: "Oppse!",
@@ -207,7 +208,6 @@ const AgencyDetails = ({ data }: Props) => {
                                 className="space-y-4"
                             >
                                 <FormField
-                                    disabled={isLoading}
                                     control={form.control}
                                     name="agencyLogo"
                                     render={({ field }) => (
@@ -225,7 +225,6 @@ const AgencyDetails = ({ data }: Props) => {
                                 />
                                 <div className="flex flex-col md:flex-row gap-4">
                                     <FormField
-                                        disabled={isLoading}
                                         control={form.control}
                                         name="name"
                                         render={({ field }) => (
@@ -237,13 +236,13 @@ const AgencyDetails = ({ data }: Props) => {
                                                     <Input
                                                         {...field}
                                                         placeholder="Your Agency Name"
+                                                        disabled={isLoading}
                                                     />
                                                 </FormControl>
                                             </FormItem>
                                         )}
                                     />
                                     <FormField
-                                        disabled={isLoading}
                                         control={form.control}
                                         name="companyEmail"
                                         render={({ field }) => (
@@ -254,6 +253,7 @@ const AgencyDetails = ({ data }: Props) => {
                                                         {...field}
                                                         readOnly
                                                         placeholder="Email"
+                                                        disabled={isLoading}
                                                     />
                                                 </FormControl>
                                             </FormItem>
@@ -262,7 +262,6 @@ const AgencyDetails = ({ data }: Props) => {
                                 </div>
                                 <div className="flex md:flex-row gap-4">
                                     <FormField
-                                        disabled={isLoading}
                                         control={form.control}
                                         name="companyPhone"
                                         render={({ field }) => (
@@ -272,8 +271,9 @@ const AgencyDetails = ({ data }: Props) => {
                                                 </FormLabel>
                                                 <FormControl>
                                                     <Input
-                                                        placeholder="Phone"
                                                         {...field}
+                                                        placeholder="Phone"
+                                                        disabled={isLoading}
                                                     />
                                                 </FormControl>
                                                 <FormMessage />
@@ -282,7 +282,6 @@ const AgencyDetails = ({ data }: Props) => {
                                     />
                                 </div>
                                 <FormField
-                                    disabled={isLoading}
                                     control={form.control}
                                     name="whiteLabel"
                                     render={({ field }) => {
@@ -308,6 +307,7 @@ const AgencyDetails = ({ data }: Props) => {
                                                         onCheckedChange={
                                                             field.onChange
                                                         }
+                                                        disabled={isLoading}
                                                     />
                                                 </FormControl>
                                             </FormItem>
@@ -315,7 +315,6 @@ const AgencyDetails = ({ data }: Props) => {
                                     }}
                                 />
                                 <FormField
-                                    disabled={isLoading}
                                     control={form.control}
                                     name="address"
                                     render={({ field }) => (
@@ -323,8 +322,9 @@ const AgencyDetails = ({ data }: Props) => {
                                             <FormLabel>Address</FormLabel>
                                             <FormControl>
                                                 <Input
-                                                    placeholder="123 st..."
                                                     {...field}
+                                                    placeholder="123 st..."
+                                                    disabled={isLoading}
                                                 />
                                             </FormControl>
                                             <FormMessage />
@@ -333,7 +333,6 @@ const AgencyDetails = ({ data }: Props) => {
                                 />
                                 <div className="flex md:flex-row gap-4">
                                     <FormField
-                                        disabled={isLoading}
                                         control={form.control}
                                         name="city"
                                         render={({ field }) => (
@@ -341,8 +340,9 @@ const AgencyDetails = ({ data }: Props) => {
                                                 <FormLabel>City</FormLabel>
                                                 <FormControl>
                                                     <Input
-                                                        placeholder="City"
                                                         {...field}
+                                                        placeholder="City"
+                                                        disabled={isLoading}
                                                     />
                                                 </FormControl>
                                                 <FormMessage />
@@ -350,7 +350,6 @@ const AgencyDetails = ({ data }: Props) => {
                                         )}
                                     />
                                     <FormField
-                                        disabled={isLoading}
                                         control={form.control}
                                         name="state"
                                         render={({ field }) => (
@@ -358,8 +357,9 @@ const AgencyDetails = ({ data }: Props) => {
                                                 <FormLabel>State</FormLabel>
                                                 <FormControl>
                                                     <Input
-                                                        placeholder="State"
                                                         {...field}
+                                                        placeholder="State"
+                                                        disabled={isLoading}
                                                     />
                                                 </FormControl>
                                                 <FormMessage />
@@ -367,7 +367,6 @@ const AgencyDetails = ({ data }: Props) => {
                                         )}
                                     />
                                     <FormField
-                                        disabled={isLoading}
                                         control={form.control}
                                         name="zipCode"
                                         render={({ field }) => (
@@ -375,8 +374,9 @@ const AgencyDetails = ({ data }: Props) => {
                                                 <FormLabel>Zipcpde</FormLabel>
                                                 <FormControl>
                                                     <Input
-                                                        placeholder="Zipcode"
                                                         {...field}
+                                                        placeholder="Zipcode"
+                                                        disabled={isLoading}
                                                     />
                                                 </FormControl>
                                                 <FormMessage />
@@ -385,7 +385,6 @@ const AgencyDetails = ({ data }: Props) => {
                                     />
                                 </div>
                                 <FormField
-                                    disabled={isLoading}
                                     control={form.control}
                                     name="country"
                                     render={({ field }) => (
@@ -393,8 +392,9 @@ const AgencyDetails = ({ data }: Props) => {
                                             <FormLabel>Country</FormLabel>
                                             <FormControl>
                                                 <Input
-                                                    placeholder="Country"
                                                     {...field}
+                                                    placeholder="Country"
+                                                    disabled={isLoading}
                                                 />
                                             </FormControl>
                                             <FormMessage />
